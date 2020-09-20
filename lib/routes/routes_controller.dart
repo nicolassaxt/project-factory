@@ -52,8 +52,12 @@ class RouteController {
     return navigator.pushNamed("/detailsStudent");
   }
 
-  Future<dynamic> returnSuccessRemotion() async {
+  Future<dynamic> returnSuccessRemotionStudent() async {
     return navigator.popUntil(ModalRoute.withName("/listStudents"));
+  }
+
+  Future<dynamic> returnSuccessRemotionAdmin() async {
+    return navigator.popUntil(ModalRoute.withName("/listAdmins"));
   }
 
   Future<dynamic> redirectCorrectHome(String typeOf) {

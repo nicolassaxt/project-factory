@@ -102,8 +102,8 @@ class AdminController {
         .snapshots();
   }
 
-   removeStudent(String username, bool remove) async {
-    if(remove == true) {
+  Future<int> removeStudent(String username, bool remove) async {
+    if (remove == true) {
       _database = _studentModel.getConnection();
       _snapshot = await _database
           .collection("students")
@@ -118,8 +118,28 @@ class AdminController {
           .where("username", isEqualTo: username)
           .get();
       return _snapshot.size;
+    } else {
+      return 1;
     }
-    else{
+  }
+
+  Future<int> removeAdmin(String username, bool remove) async {
+    if (remove == true) {
+      _database = _adminModel.getConnection();
+      _snapshot = await _database
+          .collection("admins")
+          .where("username", isEqualTo: username)
+          .get();
+      _snapshot.docs.forEach((item) {
+        _idRemotion = item.id;
+      });
+      await _database.collection("admins").doc(_idRemotion).delete();
+      _snapshot = await _database
+          .collection("admins")
+          .where("username", isEqualTo: username)
+          .get();
+      return _snapshot.size;
+    } else {
       return 1;
     }
   }

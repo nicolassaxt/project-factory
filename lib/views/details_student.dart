@@ -141,18 +141,21 @@ class _DetailsStudentState extends State<DetailsStudent> {
 
   Widget buttonRemoveStudent() {
     return Padding(
-      padding: EdgeInsets.all(15),
-      child: RaisedButton(
-        child: Text("Remover", style: TextStyle(color: Colors.white)),
-        color: Colors.red,
-        onPressed: () async {
-          await confirmRemotion();
-          _resultRemotion =
-              await _adminController.removeStudent(_usernameStudent, _remove);
-          resultRemotion(_resultRemotion);
-        },
-      ),
-    );
+        padding: EdgeInsets.all(15),
+        child: SizedBox(
+          width: 200,
+          height: 35,
+          child: RaisedButton(
+            child: Text("Remover", style: TextStyle(color: Colors.white)),
+            color: Colors.red,
+            onPressed: () async {
+              await confirmRemotion();
+              _resultRemotion = await _adminController.removeStudent(
+                  _usernameStudent, _remove);
+              resultRemotion(_resultRemotion);
+            },
+          ),
+        ));
   }
 
   void resultRemotion(int result) {
@@ -175,7 +178,7 @@ class _DetailsStudentState extends State<DetailsStudent> {
             FlatButton(
                 child: Text("Confirmar", style: TextStyle(color: Colors.blue)),
                 onPressed: () {
-                  RouteController().returnSuccessRemotion();
+                  RouteController().returnSuccessRemotionStudent();
                 }),
           ],
         ));
@@ -187,7 +190,7 @@ class _DetailsStudentState extends State<DetailsStudent> {
         context: context,
         child: AlertDialog(
           title: Text("Erro na Remoção"),
-          content: Text("Desculpe, algo deu errado, tente novamente",
+          content: Text("Desculpe, Algo Deu Errado, Tente Novamente",
               style: TextStyle(color: Colors.red)),
           actions: [
             FlatButton(
