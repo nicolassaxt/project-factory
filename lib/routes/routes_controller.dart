@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:prototype/views/home_page.dart';
+import 'package:prototype/views/list_students.dart';
 
 class RouteController {
   exitHome(bool returnPage) async {
@@ -41,6 +42,18 @@ class RouteController {
 
   Future<dynamic> returnListAdminsView() async {
     return navigator.pushNamed("/listAdmins");
+  }
+
+  Future<dynamic> returnDetailsAdminView() async {
+    return navigator.pushNamed("/detailsAdmin");
+  }
+
+  Future<dynamic> returnDetailsStudentView() async {
+    return navigator.pushNamed("/detailsStudent");
+  }
+
+  Future<dynamic> returnSuccessRemotion() async {
+    return navigator.popUntil(ModalRoute.withName("/listStudents"));
   }
 
   Future<dynamic> redirectCorrectHome(String typeOf) {

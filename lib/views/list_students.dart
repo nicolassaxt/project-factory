@@ -1,6 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:prototype/controllers/admin_controller.dart';
+import 'package:prototype/models/student_model.dart';
+import 'package:prototype/routes/routes_controller.dart';
+import 'package:provider/provider.dart';
 
 class ListStudents extends StatefulWidget {
   @override
@@ -60,6 +64,7 @@ class _ListStudentsState extends State<ListStudents> {
         itemCount: documents.length,
         itemBuilder: (context, index) {
           return ListTile(
+            trailing: FaIcon(FontAwesomeIcons.infoCircle, color: Colors.black),
             title: Text("Nome do Aluno: " + documents[index].get("name")),
             leading: CircleAvatar(
               backgroundColor: Colors.green,
@@ -67,7 +72,16 @@ class _ListStudentsState extends State<ListStudents> {
             ),
             subtitle: Text(
                 "Idade do Aluno: " + documents[index].get("age").toString()),
-            onTap: () {},
+            onTap: () {
+              StudentModel _studentModel =
+                  Provider.of<StudentModel>(context, listen: false);
+              _studentModel.setUsername(documents[index].get("username"));
+              _studentModel.setName(documents[index].get("name"));
+              _studentModel.setAge(documents[index].get("age"));
+              _studentModel.setHeight(documents[index].get("height"));
+              _studentModel.setWeight(documents[index].get("weight"));
+              RouteController().returnDetailsStudentView();
+            },
           );
         });
   }

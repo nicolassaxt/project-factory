@@ -7,6 +7,8 @@ class AdminController {
   StudentModel _studentModel = StudentModel();
   FirebaseFirestore _database;
   String _resultInsertion;
+  String _idRemotion;
+  int _resultRemotion;
   int _validateAddUser;
   QuerySnapshot _snapshot;
 
@@ -86,12 +88,39 @@ class AdminController {
 
   Stream<QuerySnapshot> listAllStudents() {
     _database = _studentModel.getConnection();
-    return _database.collection("students").orderBy("name", descending: false).snapshots();
+    return _database
+        .collection("students")
+        .orderBy("name", descending: false)
+        .snapshots();
   }
 
   Stream<QuerySnapshot> listAllAdmins() {
     _database = _studentModel.getConnection();
-    return _database.collection("admins").orderBy("name", descending: false).snapshots();
+    return _database
+        .collection("admins")
+        .orderBy("name", descending: false)
+        .snapshots();
   }
 
+   removeStudent(String username, bool remove) async {
+    if(remove == true) {
+      _database = _studentModel.getConnection();
+      _snapshot = await _database
+          .collection("students")
+          .where("username", isEqualTo: username)
+          .get();
+      _snapshot.docs.forEach((item) {
+        _idRemotion = item.id;
+      });
+      await _database.collection("students").doc(_idRemotion).delete();
+      _snapshot = await _database
+          .collection("students")
+          .where("username", isEqualTo: username)
+          .get();
+      return _snapshot.size;
+    }
+    else{
+      return 1;
+    }
+  }
 }
