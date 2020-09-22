@@ -21,6 +21,15 @@ class _AddStudentState extends State<AddStudent> {
   String _showResultOfIntegrity;
   int _resultOfExistUser;
 
+  void _resetFields(){
+    _usernameController.text = "";
+    _passwordController.text = "";
+    _nameController.text = "";
+    _heightController.text = "";
+    _weightController.text = "";
+    _ageController.text = "";
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -252,6 +261,7 @@ class _AddStudentState extends State<AddStudent> {
               child: Text("Confirmar", style: TextStyle(color: Colors.blue)),
               onPressed: () {
                 RouteController().returnOneRoute(true);
+                _resetFields();
               },
             )
           ],

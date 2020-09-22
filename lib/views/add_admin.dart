@@ -18,6 +18,12 @@ class _AddAdminState extends State<AddAdmin> {
   String _showResultIntegrity;
   int _resultIfUserExists;
 
+  void _resetFields(){
+    _usernameController.text = "";
+    _passwordController.text = "";
+    _nameController.text = "";
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -175,6 +181,7 @@ class _AddAdminState extends State<AddAdmin> {
               child: Text("Confirmar", style: TextStyle(color: Colors.blue)),
               onPressed: () {
                 RouteController().returnOneRoute(true);
+                _resetFields();
               },
             )
           ],
