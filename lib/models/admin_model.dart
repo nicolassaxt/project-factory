@@ -9,6 +9,7 @@ class AdminModel extends ChangeNotifier {
 
   void setUsername(String username) {
     _username = username;
+    notifyListeners();
   }
 
   String getUsername() {
@@ -25,6 +26,7 @@ class AdminModel extends ChangeNotifier {
 
   void setName(String name) {
     _name = name;
+    notifyListeners();
   }
 
   String getName() {

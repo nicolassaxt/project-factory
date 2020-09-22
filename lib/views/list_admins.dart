@@ -1,6 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:prototype/controllers/admin_controller.dart';
+import 'package:prototype/models/admin_model.dart';
+import 'package:prototype/routes/routes_controller.dart';
+import 'package:provider/provider.dart';
 
 class ListAdmins extends StatefulWidget {
   @override
@@ -60,6 +64,7 @@ class _ListAdminsState extends State<ListAdmins> {
       itemCount: documents.length,
       itemBuilder: (context, index) {
         return ListTile(
+          trailing: FaIcon(FontAwesomeIcons.infoCircle, color: Colors.black),
           title: Text("Nome do Administrador: " + documents[index].get("name")),
           leading: CircleAvatar(
             backgroundColor: Colors.green,
@@ -67,7 +72,13 @@ class _ListAdminsState extends State<ListAdmins> {
           ),
           subtitle: Text(
               "Usuário do Administrador: " + documents[index].get("username")),
-          onTap: () {},
+          onTap: () {
+            AdminModel _adminModel =
+                Provider.of<AdminModel>(context, listen: false);
+            _adminModel.setUsername(documents[index].get("username"));
+            _adminModel.setName(documents[index].get("name"));
+            RouteController().returnDetailsAdminView();
+          },
         );
       },
     );

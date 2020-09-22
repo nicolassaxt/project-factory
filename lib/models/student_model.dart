@@ -12,6 +12,7 @@ class StudentModel extends ChangeNotifier {
 
   void setUsername(String username) {
     _username = username;
+    notifyListeners();
   }
 
   String getUsername() {
@@ -28,6 +29,7 @@ class StudentModel extends ChangeNotifier {
 
   void setName(String name) {
     _name = name;
+    notifyListeners();
   }
 
   String getName() {
@@ -36,6 +38,7 @@ class StudentModel extends ChangeNotifier {
 
   void setAge(int age) {
     _age = age;
+    notifyListeners();
   }
 
   int getAge() {
@@ -44,6 +47,7 @@ class StudentModel extends ChangeNotifier {
 
   void setHeight(double height) {
     _height = height;
+    notifyListeners();
   }
 
   double getHeight() {
@@ -52,6 +56,7 @@ class StudentModel extends ChangeNotifier {
 
   void setWeight(double weight) {
     _weight = weight;
+    notifyListeners();
   }
 
   double getWeight() {
